@@ -22,3 +22,7 @@ Content-Type: application/json
   "email": "mistachalie@gmail.com",
   "password": "123456"
 }
+
+###
+
+GET http://localhost:3000/api/auth/forgotpassword/662bc60755234584cdde69c0

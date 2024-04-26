@@ -70,3 +70,19 @@ export const sendVerificationEmail = async ({ _id, email }, res) => {
       });
   });
 };
+
+
+export const sendResetEmail = ({ _id, email }, redirectUrl, res) => {
+  const resetString = uuidv4() + _id;
+
+  const mailOptions = {
+    from: process.env.AUTH_EMAIL,
+    to: email,
+    subject: "Password reset",
+    html: `<p>Use the link below to reset your password</p><p>This link <b>Expires in 10 minutes </b>Click<a href=${
+      redirectUrl + _id + "/" + resetString
+    }>here</a>to proceed</p>`,
+  };
+
+  transporter.sendMail(mailOptions);
+};
