@@ -1,5 +1,22 @@
 GET http://localhost:3000/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmJiMmM2YjEwYjdiZWFkMTQxODJlNyIsImlhdCI6MTcxNDE0MDE5MSwiZXhwIjoxNzE0MTQwMjExfQ.v8aybXvZLv4LyAj9lZgpkW5oaUgFkq-TdLegqKQiJGE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmJjNjA3NTUyMzQ1ODRjZGRlNjljMCIsImlhdCI6MTcxNDE1OTUzOCwiZXhwIjoxNzE0MTU5NTU4fQ.pV6xIpBI8R_9p2Yd4Is1ZyaOHb_SyCFnJrEoJnAJUVU
+
+###
+
+GET http://localhost:3000/api/users/662bc60755234584cdde69c0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmJjNjA3NTUyMzQ1ODRjZGRlNjljMCIsImlhdCI6MTcxNDE1OTUzOCwiZXhwIjoxNzE0MTU5NTU4fQ.pV6xIpBI8R_9p2Yd4Is1ZyaOHb_SyCFnJrEoJnAJUVU
+
+###
+
+PUT http://localhost:3000/api/users/662c077408c4dd7f158b8d35
+Content-Type: application/json
+
+{
+  "name": "King",
+  "email": "mistachalie@gmail.com",
+  "password": 123456,
+  "interest": "football"
+}
 
 ###
 
@@ -20,9 +37,9 @@ Content-Type: application/json
 
 {
   "email": "mistachalie@gmail.com",
-  "password": "king"
+  "password": "7891011"
 }
 
 ###
 
-GET http://localhost:3000/api/auth/forgotpassword/662bc60755234584cdde69c0
+GET http://localhost:3000/api/auth/forgotpassword/662c077408c4dd7f158b8d35
