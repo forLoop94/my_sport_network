@@ -1,3 +1,4 @@
+import { sendVerificationEmail } from "../../mailers.js";
 import User from "../../models/userModel.js";
 import { generateAccessToken } from "../../utils/generateToken.js";
 
@@ -19,7 +20,8 @@ export const registerUser = (req, res) => {
           interest,
         })
           .then((result) => {
-            res.status(201).json(result);
+            // res.status(201).json(result);
+            sendVerificationEmail(result, res)
           })
           .catch((err) => {
             console.log(err);
