@@ -4,6 +4,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import nodeMailer from "nodemailer";
 import UserVerification from "./models/authModels/verificationModel.js";
+import PasswordReset from "./models/authModels/passwordResetModel.js";
 
 const transporter = nodeMailer.createTransport({
   service: "gmail",
@@ -71,18 +72,67 @@ export const sendVerificationEmail = async ({ _id, email }, res) => {
   });
 };
 
-
 export const sendResetEmail = ({ _id, email }, redirectUrl, res) => {
   const resetString = uuidv4() + _id;
+  PasswordReset.deleteMany({ userId: _id })
+    .then((result) => {
+      const mailOptions = {
+        from: process.env.AUTH_EMAIL,
+        to: email,
+        subject: "Password reset",
+        html: `<p>Use the link below to reset your password</p><p>This link <b>Expires in 10 minutes </b> Click<a href=${
+          redirectUrl + _id + "/" + resetString
+        }>here</a> to proceed</p>`,
+      };
 
-  const mailOptions = {
-    from: process.env.AUTH_EMAIL,
-    to: email,
-    subject: "Password reset",
-    html: `<p>Use the link below to reset your password</p><p>This link <b>Expires in 10 minutes </b>Click<a href=${
-      redirectUrl + _id + "/" + resetString
-    }>here</a>to proceed</p>`,
-  };
-
-  transporter.sendMail(mailOptions);
+      const salt = 10;
+      bcrypt
+        .hash(resetString, salt)
+        .then((hashedResetString) => {
+          PasswordReset.create({
+            userId: _id,
+            resetString: hashedResetString,
+            createdAt: Date.now(),
+            expiresAt: Date.now() + 600000,
+          })
+            .then(() => {
+              transporter
+                .sendMail(mailOptions)
+                .then(() => {
+                  res.json({
+                    status: "PENDING",
+                    message: "Password reset email sent",
+                  });
+                })
+                .catch((err) => {
+                  console.log(err);
+                  res.json({
+                    status: "FAILED",
+                    message: "Password reset email failed",
+                  });
+                });
+            })
+            .catch((err) => {
+              console.log(err);
+              res.json({
+                status: "FAILED",
+                message: "Could not save password reset data",
+              });
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+          res.json({
+            status: "FAILED",
+            message: "Error occured hashing password reset data",
+          });
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({
+        status: "FAILED",
+        message: "Clearing existing password reset data failed",
+      });
+    });
 };
