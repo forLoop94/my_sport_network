@@ -1,6 +1,7 @@
 import express from "express";
 import connectDB from "./db.js";
 import authRouter from "./routes/api/authRouter.js";
+import userRouter from "./routes/api/userRouter.js";
 
 const app = express();
 app.use(express.json());
@@ -14,3 +15,4 @@ connectDB().then(() => {
 })
 
 app.use("/api/auth", authRouter);
+app.use("/api/users", userRouter);

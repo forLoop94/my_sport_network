@@ -1,4 +1,5 @@
 import User from "../../models/userModel.js";
+import { generateAccessToken } from "../../utils/generateToken.js";
 
 export const registerUser = (req, res) => {
   const { name, email, password, interest } = req.body;
@@ -53,7 +54,8 @@ export const login = (req, res) => {
                 name: user.name,
                 email: user.email,
                 interest: user.interest,
-                image: user.image
+                image: user.image,
+                token: generateAccessToken(user._id),
               });
             } else {
               res.status(403).json({

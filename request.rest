@@ -1,3 +1,8 @@
+GET http://localhost:3000/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmJiMmM2YjEwYjdiZWFkMTQxODJlNyIsImlhdCI6MTcxNDE0MDE5MSwiZXhwIjoxNzE0MTQwMjExfQ.v8aybXvZLv4LyAj9lZgpkW5oaUgFkq-TdLegqKQiJGE
+
+###
+
 POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
