@@ -7,3 +7,13 @@ Content-Type: application/json
   "password": 123456,
   "interest": "football"
 }
+
+###
+
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "mistachalie@gmail.com",
+  "password": "123456"
+}
