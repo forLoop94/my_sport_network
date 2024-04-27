@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import User from "../models/userModel.js";
 import updateUserInDatabase from "../utils/userUpdate.js";
+import { sendVerificationEmail } from "../mailers.js";
 
 export const getAllUsers = (req, res) => {
   User.find()
@@ -29,7 +30,7 @@ export const getUser = (req, res) => {
 
 export const updateUser = (req, res) => {
   const { id } = req.params;
-  const { password } = req.body;
+  const { password, email } = req.body;
   const updates = req.body;
 
   if (password) {
@@ -47,8 +48,19 @@ export const updateUser = (req, res) => {
           message: "Error occured while hashing new password",
         });
       });
+  } else if (email) {
+    User.findById(id)
+      .then((user) => {
+        sendVerificationEmail(user, res);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(404).json({
+          status: "FAILED",
+          message: "User not found",
+        });
+      });
   } else {
     updateUserInDatabase(id, updates, res);
-  };
+  }
 };
-
