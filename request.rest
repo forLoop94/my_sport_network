@@ -8,14 +8,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmJjNjA3N
 
 ###
 
-PUT http://localhost:3000/api/users/662c077408c4dd7f158b8d35
+PUT http://localhost:3000/api/users/662cba2ce480e8fbffe30ca8
 Content-Type: application/json
 
 {
-  "name": "King",
-  "email": "mistachalie@gmail.com",
-  "password": 123456,
-  "interest": "football"
+  "name": "Leb",
+  "interest": "freakball"
 }
 
 ###
@@ -42,4 +40,4 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/api/auth/forgotpassword/662c077408c4dd7f158b8d35
+GET http://localhost:3000/api/auth/forgotpassword/662cba2ce480e8fbffe30ca8
