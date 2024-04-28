@@ -1,0 +1,42 @@
+GET http://localhost:3000/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmJjNjA3NTUyMzQ1ODRjZGRlNjljMCIsImlhdCI6MTcxNDE1OTUzOCwiZXhwIjoxNzE0MTU5NTU4fQ.pV6xIpBI8R_9p2Yd4Is1ZyaOHb_SyCFnJrEoJnAJUVU
+
+###
+
+GET http://localhost:3000/api/users/662bc60755234584cdde69c0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MmJjNjA3NTUyMzQ1ODRjZGRlNjljMCIsImlhdCI6MTcxNDE1OTUzOCwiZXhwIjoxNzE0MTU5NTU4fQ.pV6xIpBI8R_9p2Yd4Is1ZyaOHb_SyCFnJrEoJnAJUVU
+
+###
+
+PUT http://localhost:3000/api/users/662cba2ce480e8fbffe30ca8
+Content-Type: application/json
+
+{
+  "email": "unorjikingsley@gmail.com"
+}
+
+###
+
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "King",
+  "email": "unorjikingsley@gmail.com",
+  "password": 123456,
+  "interest": "football"
+}
+
+###
+
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "mistachalie@gmail.com",
+  "password": "7891011"
+}
+
+###
+
+GET http://localhost:3000/api/auth/forgotpassword/662cba2ce480e8fbffe30ca8
